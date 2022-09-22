@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function roomIdMessageRoute(req, res) {
   if (req.method === "GET") {
     const rooms = readDB();
-    const id = Number(req.query.id);
+    const id = req.query.id;
 
     const roomIdx = rooms.findIndex((x) => x.roomId === id);
     if (roomIdx === -1)
