@@ -26,7 +26,8 @@ export default function roomIdMessageRoute(req, res) {
 
     const text = req.body.text;
     rooms[roomIdx].messages.text = text;
-    writeDB(rooms);
+    rooms[roomIdx].messages.messageId = createId;
+    writeDB(rooms[roomIdx]);
 
     return res.json({ ok: true, message: rooms[roomIdx] });
 

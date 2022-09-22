@@ -8,5 +8,5 @@ export default function roomRoute(req, res) {
     roomName: x.roomName,
   }));
 
-  return res.json({ ok: true, result });
+  return res.json({ ok: true, rooms: result });
 }
