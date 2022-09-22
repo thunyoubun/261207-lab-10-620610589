@@ -10,10 +10,14 @@ export default function roomIdMessageRoute(req, res) {
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid room id" });
 
+    const text = req.body.text;
+    rooms[roomIdx].messages.text = text;
+    writeDB(rooms);
+
     rooms.splice(roomIdx, 1);
     writeDB(rooms);
 
-    return res.json({ ok: true, id });
+    return res.json({ ok: true, message: rooms[roomIdx].messages });
   } else if (req.method === "POST") {
     const rooms = readDB();
     const id = uuidv4();
@@ -25,9 +29,7 @@ export default function roomIdMessageRoute(req, res) {
     const roomIdx = rooms.findIndex((x) => x.id === id);
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid Text Input" });
-    const text = req.body.text;
-    rooms[roomIdx].messages.text = text;
-    writeDB(todolist);
+
     return res.json({ ok: true, message: rooms[roomIdx] });
 
     //read request body
