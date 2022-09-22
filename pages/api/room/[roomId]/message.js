@@ -17,7 +17,7 @@ export default function roomIdMessageRoute(req, res) {
     const newId = uuidv4();
 
     //validate body
-    if (typeof req.body.ok !== "boolean")
+    if (typeof req.body.text !== "text" || req.body.text !== "string")
       return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
     const roomIdx = rooms.findIndex((x) => x.roomId === id);
@@ -30,7 +30,7 @@ export default function roomIdMessageRoute(req, res) {
       text: text,
     };
     rooms[roomIdx].messages.push(newMessage);
-    writeDB(rooms[roomIdx]);
+    writeDB(rooms[roomIdx].messages);
 
     return res.json({ ok: true, message: rooms[roomIdx].messages });
 
