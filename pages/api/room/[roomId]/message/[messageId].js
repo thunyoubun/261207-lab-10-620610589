@@ -11,9 +11,6 @@ export default function roomIdMessageIdRoute(req, res) {
       x.messages.findIndex((x) => x.messageId === messageId)
     );
 
-    if (typeof req.body.ok !== "boolean")
-      return res.status(400).json({ ok: false, message: "Invalid Text Input" });
-
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid message id" });
 
