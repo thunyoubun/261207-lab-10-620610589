@@ -30,7 +30,7 @@ export default function roomIdMessageRoute(req, res) {
       text: text,
     };
     rooms[roomIdx].messages.push(newMessage);
-    writeDB(rooms[roomIdx].messages);
+    writeDB(rooms);
 
     return res.json({ ok: true, message: rooms[roomIdx].messages });
 
