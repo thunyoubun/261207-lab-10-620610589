@@ -14,7 +14,6 @@ export default function roomIdMessageRoute(req, res) {
   } else if (req.method === "POST") {
     const rooms = readDB();
     const id = req.query.roomId;
-    const newId = uuidv4();
 
     //validate body
     if (typeof req.body.text !== "string")
@@ -24,10 +23,9 @@ export default function roomIdMessageRoute(req, res) {
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid Text Input" });
 
-    const text = req.body.text;
     const newMessage = {
-      messageId: newId,
-      text: text,
+      messageId: uuidv4(),
+      text: req.body.text,
     };
     rooms[roomIdx].messages.push(newMessage);
     writeDB(rooms);

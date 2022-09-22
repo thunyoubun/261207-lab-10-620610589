@@ -14,6 +14,7 @@ export default function Home() {
 
   function processMsgs(msgs) {
     msgs.reverse();
+
     setMsgs(msgs.slice(0, 10));
   }
 
@@ -102,7 +103,7 @@ export default function Home() {
             placeholder="Type Something.."
           ></input>
           {msgs.map((x) => (
-            <p key={x.messages}>
+            <p key={x.messageId}>
               {x.text}{" "}
               <button onClick={() => deleteMsg(x.messageId)}>Delete</button>
             </p>

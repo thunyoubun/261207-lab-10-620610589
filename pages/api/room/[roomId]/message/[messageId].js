@@ -22,6 +22,6 @@ export default function roomIdMessageIdRoute(req, res) {
 
     writeDB(rooms);
 
-    return res.json({ ok: true, message: rooms[roomIdx].messages });
+    return res.json({ ok: true });
   }
 }
