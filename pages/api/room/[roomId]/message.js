@@ -13,7 +13,7 @@ export default function roomIdMessageRoute(req, res) {
     return res.json({ ok: true, message: rooms[roomIdx].messages });
   } else if (req.method === "POST") {
     const rooms = readDB();
-    const id = req.query.id;
+    const id = req.query.roomId;
     const newId = uuidv4();
 
     //validate body

@@ -4,7 +4,7 @@ export default function roomIdMessageIdRoute(req, res) {
   //read value from URL
   if (req.method === "DELETE") {
     const rooms = readDB();
-    const roomId = Number(req.query.roomId);
+    const roomId = req.query.roomId;
     const messageId = req.query.messageId;
 
     const roomIdx = rooms.findIndex(
