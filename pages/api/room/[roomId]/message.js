@@ -25,8 +25,11 @@ export default function roomIdMessageRoute(req, res) {
       return res.status(404).json({ ok: false, message: "Invalid Text Input" });
 
     const text = req.body.text;
-    rooms[roomIdx].messages.text = text;
-    rooms[roomIdx].messages.messageId = newId;
+    const newMessage = {
+      messageId: newId,
+      text: text,
+    };
+    rooms[roomIdx].messages.push(newMessage);
     writeDB(rooms[roomIdx]);
 
     return res.json({ ok: true, message: rooms[roomIdx].messages });
