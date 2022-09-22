@@ -15,7 +15,11 @@ export default function roomIdMessageIdRoute(req, res) {
       return res.status(404).json({ ok: false, message: "Invalid message id" });
 
     rooms[roomIdx].splice(roomIdx, 1);
+
     writeDB(rooms);
+
+    if (typeof res.body.ok !== "boolean")
+      return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
     return res.json({ ok: true });
   }
