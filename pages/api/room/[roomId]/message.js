@@ -17,7 +17,7 @@ export default function roomIdMessageRoute(req, res) {
     const newId = uuidv4();
 
     //validate body
-    if (req.body.text !== "text" || req.body.text !== "string")
+    if (typeof req.body.text !== "string")
       return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
     const roomIdx = rooms.findIndex((x) => x.roomId === id);
