@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function roomIdMessageRoute(req, res) {
   if (req.method === "GET") {
     const rooms = readDB();
-    const id = req.query.id;
+    const id = req.query.roomId;
 
     const roomIdx = rooms.findIndex((x) => x.roomId === id);
     if (roomIdx === -1)
@@ -14,10 +14,10 @@ export default function roomIdMessageRoute(req, res) {
   } else if (req.method === "POST") {
     const rooms = readDB();
     const id = req.query.id;
-    const createId = uuidv4();
+    const newId = uuidv4();
 
     //validate body
-    if (typeof req.body.ok !== "boolean")
+    if (typeof req.body.text !== "boolean")
       return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
     const roomIdx = rooms.findIndex((x) => x.id === id);
@@ -26,14 +26,13 @@ export default function roomIdMessageRoute(req, res) {
 
     const text = req.body.text;
     rooms[roomIdx].messages.text = text;
-    rooms[roomIdx].messages.messageId = createId;
+    rooms[roomIdx].messages.messageId = newId;
     writeDB(rooms[roomIdx]);
 
-    return res.json({ ok: true, message: rooms[roomIdx] });
+    return res.json({ ok: true, message: rooms[roomIdx].messages });
 
     //read request body
 
     //create new id
-    const newId = uuidv4();
   }
 }
