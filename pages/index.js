@@ -102,7 +102,7 @@ export default function Home() {
             }}
             placeholder="Type Something.."
           ></input>
-          {msg.map((x) => (
+          {msgs.map((x) => (
             <p key={x.messageId}>
               {x.text}{" "}
               <button onClick={() => deleteMsg(x.messageId)}>Delete</button>
