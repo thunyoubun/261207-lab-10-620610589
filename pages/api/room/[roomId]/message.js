@@ -23,7 +23,7 @@ export default function roomIdMessageRoute(req, res) {
       return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
     const roomIdx = rooms.findIndex((x) => x.id === id);
-    if (todoIdx === -1)
+    if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid Text Input" });
     const text = req.body.text;
     rooms[roomIdx].messages.text = text;
