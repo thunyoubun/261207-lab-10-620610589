@@ -20,7 +20,7 @@ export default function roomIdMessageRoute(req, res) {
     if (typeof req.body.text !== "boolean")
       return res.status(400).json({ ok: false, message: "Invalid Text Input" });
 
-    const roomIdx = rooms.findIndex((x) => x.id === id);
+    const roomIdx = rooms.findIndex((x) => x.roomId === id);
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid Text Input" });
 
