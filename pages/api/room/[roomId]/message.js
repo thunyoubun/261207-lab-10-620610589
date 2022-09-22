@@ -10,7 +10,7 @@ export default function roomIdMessageRoute(req, res) {
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid room id" });
 
-    return res.json({ ok: true, message: rooms[roomIdx].messages });
+    return res.json({ ok: true, messages: rooms[roomIdx].messages });
   } else if (req.method === "POST") {
     const rooms = readDB();
     const id = req.query.roomId;
@@ -30,7 +30,7 @@ export default function roomIdMessageRoute(req, res) {
     rooms[roomIdx].messages.push(newMessage);
     writeDB(rooms);
 
-    return res.json({ ok: true, message: rooms[roomIdx].messages });
+    return res.json({ ok: true, messages: rooms[roomIdx].messages });
 
     //read request body
 
