@@ -2,6 +2,22 @@ import { writeDB, readDB } from "../../../../../backendLibs/dbLib";
 
 export default function roomIdMessageIdRoute(req, res) {
   //read value from URL
-  const roomId = req.query.roomId;
-  const messageId = req.query.messageId;
+  if (req.method === "DELETE") {
+    const rooms = readDB();
+    const roomId = Number(req.query.roomId);
+    const messageId = req.query.messageId;
+
+    const roomIdx = rooms.findIndex(
+      (x) =>
+        x.roomId === roomId &&
+        x.messages.findIndex((x) => x.messageId === messageId)
+    );
+    if (roomIdx === -1)
+      return res.status(404).json({ ok: false, message: "Invalid message id" });
+
+    rooms.splice(roomIdx, 1);
+    writeDB(rooms);
+
+    return res.json({ ok: true });
+  }
 }
