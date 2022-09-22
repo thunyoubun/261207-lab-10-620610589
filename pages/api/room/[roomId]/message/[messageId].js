@@ -13,7 +13,7 @@ export default function roomIdMessageIdRoute(req, res) {
     if (roomIdx === -1)
       return res.status(404).json({ ok: false, message: "Invalid message id" });
 
-    rooms.splice(roomIdx, 1);
+    rooms[roomIdx].splice(roomIdx, 1);
     writeDB(rooms);
 
     return res.json({ ok: true });
