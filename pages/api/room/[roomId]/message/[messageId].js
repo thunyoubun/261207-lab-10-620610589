@@ -18,9 +18,6 @@ export default function roomIdMessageIdRoute(req, res) {
 
     writeDB(rooms);
 
-    if (typeof res.body.ok !== "boolean")
-      return res.status(400).json({ ok: false, message: "Invalid Text Input" });
-
-    return res.json({ ok: true });
+    return res.body.json({ ok: true });
   }
 }
